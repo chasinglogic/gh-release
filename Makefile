@@ -19,12 +19,12 @@ test: poetry.lock
 
 .PHONY: lint
 lint: poetry.lock format
-	$(BIN) flake8 github_release tests
+	$(BIN) flake8 release_mgr tests
 
 .PHONY: format
 format: poetry.lock
-	$(BIN) black github_release tests
-	$(BIN) isort github_release tests
+	$(BIN) black release_mgr tests
+	$(BIN) isort release_mgr tests
 
 .PHONY: release
 release: poetry.lock

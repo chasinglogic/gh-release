@@ -1,7 +1,7 @@
 import os
 import re
 
-from github_release.git import git
+from release_mgr.git import git
 
 
 class VersionFile:

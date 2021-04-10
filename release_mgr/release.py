@@ -1,4 +1,4 @@
-from github_release.git import get_contributors_between, get_messages_between
+from release_mgr.git import get_contributors_between, get_messages_between
 
 
 def build_changelog(messages):

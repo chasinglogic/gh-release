@@ -1,6 +1,6 @@
 import re
 
-from github_release.version_files.version_file import VersionFile
+from release_mgr.version_files.version_file import VersionFile
 
 
 class PyProjectTOML(VersionFile):

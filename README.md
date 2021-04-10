@@ -1,4 +1,4 @@
-# gh-release
+# release_mgr
 
 A simple tool for managing software releases on GitHub.
 
@@ -9,7 +9,7 @@ the version file for your favourite programming language.
 ## Usage
 
 ```
-Usage: gh-release [OPTIONS]
+Usage: release-mgr [OPTIONS]
 
   A simple tool for managing software releases on GitHub.
 
@@ -37,7 +37,7 @@ Options:
 ## Example run
 
 ```
-chasinglogic@raza ~/Code/gh-release master λ poetry run gh-release --patch
+chasinglogic@raza ~/Code/release-mgr master λ poetry run release-mgr --patch
 Creating release 0.1.2 8cc48996b099bdb4d2e04e6eeb7a2598381baf68
 Previous version 0.1.1 0076879f4ca72a5e30a023c5f83dbcbb34a62f58
 Pre-release? False
@@ -63,10 +63,9 @@ Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 298 bytes | 298.00 KiB/s, done.
 Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
 remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-To github.com:chasinglogic/gh-release.git
+To github.com:chasinglogic/release_mgr.git
    8cc4899..4e89ce6  master -> master
 Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
-To github.com:chasinglogic/gh-release.git
+To github.com:chasinglogic/release_mgr.git
  * [new tag]         0.1.2 -> 0.1.2
-chasinglogic@raza ~/Code/gh-release master λ
 ```
