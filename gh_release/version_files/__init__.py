@@ -28,7 +28,10 @@ def update_vfs(version):
         if not vf:
             continue
 
-        version_file_updated = vf.update(str(version))
-        if version_file_updated:
+        updated = vf.update(str(version))
+        if updated:
             print("Updated version in:", vf.filename)
+
+        version_file_updated = version_file_updated or updated
+
     return version_file_updated
