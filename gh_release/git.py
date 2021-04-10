@@ -21,8 +21,8 @@ def get_repo():
 
         if url.startswith("ssh") or url.startswith("git@"):
             repo = url.split(":")[-1]
-            if repo.endswith('.git'):
-                repo = repo[:-len('.git')]
+            if repo.endswith(".git"):
+                repo = repo[: -len(".git")]
 
             return repo
         else:
