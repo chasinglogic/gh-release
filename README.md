@@ -33,3 +33,40 @@ Options:
 
   --help                    Show this message and exit.
 ```
+
+## Example run
+
+```
+chasinglogic@raza ~/Code/gh-release master λ poetry run gh-release --patch
+Creating release 0.1.2 8cc48996b099bdb4d2e04e6eeb7a2598381baf68
+Previous version 0.1.1 0076879f4ca72a5e30a023c5f83dbcbb34a62f58
+Pre-release? False
+Draft release? False
+Repository chasinglogic/gh-release
+============= Release Notes ============
+# Release 0.1.2
+
+- 8cc4899 fix: Return True if **any** version file is updated
+- 5473ff9 fix: git/ssh urls end with .git
+- 429e675 fix: Stage the version file when updated
+
+# Contributors to this Release
+
+- Mathew Robinson <mathew@chasinglogic.io>
+
+Does this look correct? (y/N) y
+Updated version in: pyproject.toml
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 298 bytes | 298.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:chasinglogic/gh-release.git
+   8cc4899..4e89ce6  master -> master
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:chasinglogic/gh-release.git
+ * [new tag]         0.1.2 -> 0.1.2
+chasinglogic@raza ~/Code/gh-release master λ
+```
