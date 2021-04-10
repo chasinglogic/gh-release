@@ -1,5 +1,7 @@
 import re
 
+from gh_release.git import get_commit_for_tag, get_tags, git
+
 
 class Version:
     """A semver object."""
@@ -16,6 +18,26 @@ class Version:
     @staticmethod
     def is_version_string(verstr):
         return bool(Version.release_ver.match(verstr))
+
+    @classmethod
+    def latest_version(cls):
+        tags = [
+            tag[len("refs/tags/") :] for tag in get_tags() if tag[len("refs/tags/") :]
+        ]
+        if not tags:
+            commits = git("log", "--reverse", "--format=%H").split("\n")
+            return (
+                commits[0],
+                cls(0, 0, 0),
+            )
+
+        versions = sorted(map(Version.from_str, tags))
+        latest_version = versions[-1]
+        last_version_commit = get_commit_for_tag(str(latest_version))
+        return (
+            last_version_commit,
+            latest_version,
+        )
 
     @classmethod
     def from_str(cls, verstr):
