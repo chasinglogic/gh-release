@@ -21,7 +21,7 @@ def update_version_files(version):
 
 def update_vfs(version):
     version_file_updated = False
-    for version_file in []:
+    for version_file in VERSION_FILES:
         vf = version_file.from_file()
         if not vf:
             continue
