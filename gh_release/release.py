@@ -5,7 +5,7 @@ def build_changelog(messages):
     return "\n".join(
         [
             f"- {message}"
-            for message in messages.split("\n")
+            for message in messages
             if message
             and "release: " not in message
             and "Merge pull request" not in message
