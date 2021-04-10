@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "github_release"
-version = "0.1.2"
+version = "0.1.3"
 description = "A simple tool for managing software releases on GitHub."
 authors = ["Mathew Robinson <mathew@chasinglogic.io>"]
 
