@@ -8,7 +8,7 @@ ifeq ($(OS), Windows_NT)
 endif
 
 
-all: lint test
+all: format lint test
 
 poetry.lock: pyproject.toml
 	poetry install
@@ -19,12 +19,12 @@ test: poetry.lock
 
 .PHONY: lint
 lint: poetry.lock format
-	$(BIN) flake8
+	$(BIN) flake8 gh_release tests
 
 .PHONY: format
 format: poetry.lock
-	$(BIN) black
-	$(BIN) isort
+	$(BIN) black gh_release tests
+	$(BIN) isort gh_release tests
 
 .PHONY: release
 release: poetry.lock
