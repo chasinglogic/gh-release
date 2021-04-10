@@ -1,5 +1,6 @@
 import json
 
+from gh_release.git import git
 from gh_release.version_files.version_file import VersionFile
 
 
@@ -17,4 +18,6 @@ class PackageJSON(VersionFile):
                 pkg_json_file,
                 indent=2,
             )
+
+        git("add", self.filename)
         return True

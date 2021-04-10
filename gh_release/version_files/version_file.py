@@ -1,6 +1,8 @@
 import os
 import re
 
+from gh_release.git import git
+
 
 class VersionFile:
     """
@@ -36,4 +38,5 @@ class VersionFile:
         with open(self.filename, "w", encoding="utf-8") as new:
             new.write(content)
 
+        git("add", self.filename)
         return True
