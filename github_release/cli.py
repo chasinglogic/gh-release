@@ -6,11 +6,11 @@ from copy import deepcopy
 
 import click
 
-from gh_release.git import get_commit_for_tag, get_repo, git
-from gh_release.github import create_release
-from gh_release.release import release_notes_for_version
-from gh_release.version import Version
-from gh_release.version_files import update_version_files
+from github_release.git import get_commit_for_tag, get_repo, git
+from github_release.github import create_release
+from github_release.release import release_notes_for_version
+from github_release.version import Version
+from github_release.version_files import update_version_files
 
 
 @click.command()

@@ -1,6 +1,6 @@
 import re
 
-from gh_release.git import get_commit_for_tag, get_tags, git
+from github_release.git import get_commit_for_tag, get_tags, git
 
 
 class Version:

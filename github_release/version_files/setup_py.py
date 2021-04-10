@@ -1,6 +1,6 @@
 import re
 
-from gh_release.version_files.version_file import VersionFile
+from github_release.version_files.version_file import VersionFile
 
 
 class SetupPy(VersionFile):

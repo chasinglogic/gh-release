@@ -1,7 +1,7 @@
 import json
 
-from gh_release.git import git
-from gh_release.version_files.version_file import VersionFile
+from github_release.git import git
+from github_release.version_files.version_file import VersionFile
 
 
 class PackageJSON(VersionFile):

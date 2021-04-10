@@ -1,9 +1,9 @@
-from gh_release.git import git
-from gh_release.version_files.cargo_toml import CargoTOML
-from gh_release.version_files.dunder_version import DunderVersion
-from gh_release.version_files.package_json import PackageJSON
-from gh_release.version_files.pyproject import PyProjectTOML
-from gh_release.version_files.setup_py import SetupPy
+from github_release.git import git
+from github_release.version_files.cargo_toml import CargoTOML
+from github_release.version_files.dunder_version import DunderVersion
+from github_release.version_files.package_json import PackageJSON
+from github_release.version_files.pyproject import PyProjectTOML
+from github_release.version_files.setup_py import SetupPy
 
 VERSION_FILES = [
     PackageJSON,
