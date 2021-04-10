@@ -1,3 +1,7 @@
+import os
+import re
+
+
 class VersionFile:
     """
     Represents a file which would contain the version.
