@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "gh-release"
 version = "0.1.0"
-description = ""
+description = "A simple tool for managing software releases on GitHub."
 authors = ["Mathew Robinson <mathew@chasinglogic.io>"]
+
+[tool.poetry.scripts]
+gh-release = 'gh_release.cli:main'
 
 [tool.poetry.dependencies]
 python = "^3.8"
