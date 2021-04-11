@@ -6,6 +6,14 @@ This is a polyglot tool, so it aims to supports all kinds of Version metadata fi
 all languages. I've added the ones that I use every day but feel free to send a PR with
 the version file for your favourite programming language.
 
+## Installation
+
+`release-mgr` is available on pypi:
+
+```
+pip3 install --user release_mgr
+```
+
 ## Usage
 
 ```
