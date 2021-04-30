@@ -1,12 +1,14 @@
 from release_mgr.git import git
 from release_mgr.version_files.cargo_toml import CargoTOML
 from release_mgr.version_files.dunder_version import DunderVersion
+from release_mgr.version_files.lerna_json import LernaJSON
 from release_mgr.version_files.package_json import PackageJSON
 from release_mgr.version_files.pyproject import PyProjectTOML
 from release_mgr.version_files.setup_py import SetupPy
 
 VERSION_FILES = [
     PackageJSON,
+    LernaJSON,
     SetupPy,
     PyProjectTOML,
     DunderVersion,
