@@ -39,13 +39,17 @@ Options:
   -s, --skip-version-files  Don't try to update version metadata files
                             (package.json, setup.py etc.)
 
+  --skip-upload             Don't try to create a release on github and don't
+                            push the commits
+
   --help                    Show this message and exit.
+
 ```
 
 ## Example run
 
 ```
-chasinglogic@raza ~/Code/release-mgr master λ poetry run release-mgr --patch
+chasinglogic@raza ~/Code/release-mgr master λ release-mgr --patch
 Creating release 0.1.2 8cc48996b099bdb4d2e04e6eeb7a2598381baf68
 Previous version 0.1.1 0076879f4ca72a5e30a023c5f83dbcbb34a62f58
 Pre-release? False
