@@ -120,6 +120,9 @@ def main(
         last_version_commit,
     )
 
+    if title:
+        release_notes = f"# {version}\n\n{release_notes}"
+
     repo = repo or get_repo()
 
     print("Creating release", version, version_commit)
