@@ -1,4 +1,4 @@
-# release_mgr
+# release-mgr
 
 A simple tool for managing software releases on GitHub.
 
