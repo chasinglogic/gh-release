@@ -20,7 +20,14 @@ class DunderVersion(VersionFile):
             if not files:
                 continue
 
+            files = [f for f in files if not f.startswith("test")]
+
             obj = cls()
             obj.filename = files[0]
+            obj.load_content()
+            if "__version__" not in obj.content:
+                continue
+
             return obj
+
         return None
