@@ -19,7 +19,7 @@ with open(init_py, encoding="utf-8") as f:
     )
 
 setup(
-    name="release_mgr",
+    name="release-mgr",
     version=version,
     url="https://github.com/chasinglogic/gh-release",
     license="GPL-3.0",
