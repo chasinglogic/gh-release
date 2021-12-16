@@ -72,6 +72,11 @@ from release_mgr.version_files import update_version_files
     is_flag=True,
     help="Don't try to update version metadata files (package.json, setup.py etc.)",
 )
+@click.option(
+    "--skip-upload",
+    is_flag=True,
+    help="Don't try to create a release on github and don't push the commits",
+)
 def main(
     version,
     major,
@@ -82,6 +87,7 @@ def main(
     draft,
     repo,
     title,
+    skip_upload,
 ):
     """
     A simple tool for managing software releases on GitHub.
@@ -132,18 +138,20 @@ def main(
         update_version_files(version)
 
     git("tag", str(version))
-    git("push", "--tags")
+    if not skip_upload:
+        git("push", "--tags")
 
     try:
-        create_release(
-            token=token,
-            repo=repo,
-            tag_name=str(version),
-            name=str(version),
-            body=release_notes,
-            draft=draft,
-            prerelease=pre_release,
-        )
+        if not skip_upload:
+            create_release(
+                token=token,
+                repo=repo,
+                tag_name=str(version),
+                name=str(version),
+                body=release_notes,
+                draft=draft,
+                prerelease=pre_release,
+            )
     except Exception as exc:
         print("Failed to create release!")
         print(exc)
