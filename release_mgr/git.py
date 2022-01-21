@@ -47,11 +47,7 @@ def get_tags():
 
 
 def get_commit_for_tag(tag):
-    return (
-        check_output(["git", "show", "--no-patch", "--pretty=%H", tag])
-        .decode("utf-8")
-        .strip()
-    )
+    return check_output(["git", "rev-list", "-n", "1", tag]).decode("utf-8").strip()
 
 
 def get_contributors_between(oldest_commit, latest_commit):
