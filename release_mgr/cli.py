@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
+import argparse
 import os
 import sys
 from copy import deepcopy
-
-import click
 
 from release_mgr.git import get_commit_for_tag, get_repo, git
 from release_mgr.github import create_release
@@ -13,85 +12,82 @@ from release_mgr.version import Version
 from release_mgr.version_files import update_version_files
 
 
-@click.command()
-@click.option(
-    "--version",
-    "-v",
-    type=str,
-    default="",
-    help="Specify the version to go to",
-)
-@click.option(
-    "--pre-release",
-    "-l",
-    is_flag=True,
-    help="Indicates this is a pre-release",
-)
-@click.option(
-    "--draft",
-    "-d",
-    is_flag=True,
-    help="Indicates this is a draft release",
-)
-@click.option(
-    "--repo",
-    "-r",
-    type=str,
-    default=None,
-    help="The repository to create the release on in :owner/:repo format, "
-    "will attempt to parse from git remotes if not given",
-)
-@click.option(
-    "--title",
-    "-t",
-    is_flag=True,
-    help="If given use the release name as the markdown title, otherwise title "
-    "is omitted for Github style formatting",
-)
-@click.option(
-    "--minor",
-    "-m",
-    is_flag=True,
-    help="Bump minor version",
-)
-@click.option(
-    "--major",
-    "-j",
-    is_flag=True,
-    help="Bump major version",
-)
-@click.option(
-    "--patch",
-    "-p",
-    is_flag=True,
-    help="Bump patch version",
-)
-@click.option(
-    "--skip-version-files",
-    "-s",
-    is_flag=True,
-    help="Don't try to update version metadata files (package.json, setup.py etc.)",
-)
-@click.option(
-    "--skip-upload",
-    is_flag=True,
-    help="Don't try to create a release on github and don't push the commits",
-)
-def main(
-    version,
-    major,
-    patch,
-    minor,
-    skip_version_files,
-    pre_release,
-    draft,
-    repo,
-    title,
-    skip_upload,
-):
+def main():
     """
     A simple tool for managing software releases on GitHub.
     """
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--version",
+        "-v",
+        type=str,
+        default="",
+        help="Explicitly specify the new version to use.",
+    )
+    parser.add_argument(
+        "--pre-release",
+        "-l",
+        help="Indicates this is a pre-release and the Github release will reflect this.",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--draft",
+        "-d",
+        help="Indicates this is a draft release and the Github release will reflect this.",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--skip-version-files",
+        "-s",
+        help="If provided, don't try to update version metadata files (package.json, setup.py etc.)",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--skip-upload",
+        help="If provided, don't try to create a release on github and don't push the commits / tags",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--repo",
+        "-r",
+        type=str,
+        default=None,
+        help="The repository to create the release on in :owner/:repo format, "
+        "will attempt to parse from git remotes if not given",
+    )
+    # TODO: Think about how this should work
+    parser.add_argument(
+        "--title",
+        "-t",
+        help="If given use the release name as the markdown title, "
+        "otherwise title is omitted for Github style formatting.",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--minor",
+        "-m",
+        help="Bump the minor version, ignored if --version is given.",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--major",
+        "-j",
+        help="Bump the major version, ignored if --version is given.",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--patch",
+        "-p",
+        help="Bump the patch version, ignored if --version is given.",
+        action="store_true",
+    )
+    args = parser.parse_args()
+
+    title = args.title
+    version = args.version
+    major, minor, patch = args.major, args.minor, args.patch
+
     if not any((patch, minor, major, version)):
         print("Must provide one of --version, --major, --minor, or --patch.")
         sys.exit(1)
@@ -123,12 +119,12 @@ def main(
     if title:
         release_notes = f"# {version}\n\n{release_notes}"
 
-    repo = repo or get_repo()
+    repo = args.repo or get_repo()
 
     print("Creating release", version, version_commit)
     print("Previous version", last_version, last_version_commit)
-    print("Pre-release?", pre_release)
-    print("Draft release?", draft)
+    print("Pre-release?", args.pre_release)
+    print("Draft release?", args.draft)
     print("Repository", repo)
     print("============= Release Notes ============")
     print(release_notes)
@@ -137,23 +133,23 @@ def main(
     if not ans.startswith("y"):
         return
 
-    if not skip_version_files:
+    if not args.skip_version_files:
         update_version_files(version)
 
     git("tag", str(version))
-    if not skip_upload:
+    if not args.skip_upload:
         git("push", "--tags")
 
     try:
-        if not skip_upload:
+        if not args.skip_upload:
             create_release(
                 token=token,
                 repo=repo,
                 tag_name=str(version),
                 name=str(version),
                 body=release_notes,
-                draft=draft,
-                prerelease=pre_release,
+                draft=args.draft,
+                prerelease=args.pre_release,
             )
     except Exception as exc:
         print("Failed to create release!")
